@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BUBU ❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI';
+  text-align:center;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb);
+  color:#fff;
+  overflow:hidden;
+}
+
+/* LOCK */
+#lock{
+  position:absolute;
+  top:35%;
+  width:100%;
+}
+input{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+}
+
+/* MAIN */
+#main{
+  display:none;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.15);
+  border-radius:20px;
+  padding:20px;
+  width:90%;
+  margin:auto;
+  margin-top:30px;
+}
+
+/* TITLE */
+h1{
+  font-size:40px;
+}
+
+/* COUNTDOWN */
+#countdown{
+  margin-top:10px;
+  font-size:18px;
+}
+
+/* BUTTON */
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:15px;
+  background:#ff758c;
+  color:white;
+}
+
+/* MESSAGE */
+#typing{
+  margin-top:15px;
+  font-size:18px;
+}
+
+/* IMAGE */
+#slide{
+  width:260px;
+  border-radius:20px;
+  margin-top:15px;
+  opacity:0;
+  transition:1s;
+}
+
+/* CHAT */
+#chat{
+  margin-top:20px;
+  text-align:left;
+}
+.msg{
+  background:white;
+  color:black;
+  padding:8px;
+  border-radius:10px;
+  margin:5px;
+  width:70%;
+}
+
+/* POPUP */
+#popup{
+  display:none;
+  position:fixed;
+  top:40%;
+  width:100%;
+  font-size:30px;
+}
+
+/* HEART */
+.heart{
+  position:absolute;
+  animation:float 6s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+</style>
+
+</head>
+<body>
+
+<div id="lock">
+  <h2>Enter Password 💖</h2>
+  <input type="password" id="pass">
+  <br><br>
+  <button onclick="check()">Unlock</button>
+</div>
+
+<div id="main">
+  <h1>🎂 HAPPY BIRTHDAY BUBU 🎂</h1>
+  <div id="countdown"></div>
+  <button onclick="start()">Tap for Magic 💖</button>
+
+  <div id="typing"></div>
+  <img id="slide">
+  <div id="chat"></div>
+</div>
+
+<div id="popup">💖 I LOVE YOU 💖</div>
+
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
+<script>
+
+/* PASSWORD */
+function check(){
+  if(document.getElementById("pass").value==="LIHAN1401"){
+    document.getElementById("lock").style.display="none";
+    document.getElementById("main").style.display="block";
+  } else{
+    alert("Wrong Password");
+  }
+}
+
+/* COUNTDOWN */
+let targetDate = new Date("June 1, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+  let now = new Date().getTime();
+  let gap = targetDate - now;
+
+  let d = Math.floor(gap/(1000*60*60*24));
+  let h = Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((gap%(1000*60*60))/(1000*60));
+  let s = Math.floor((gap%(1000*60))/1000);
+
+  document.getElementById("countdown").innerHTML =
+  "⏳ " + d+"d "+h+"h "+m+"m "+s+"s left";
+},1000);
+
+/* MESSAGE */
+let text=`TO MY ONE AND ONLY HANDSOME BUBU .. A HAPPIEST BIRTHDAY NICK 🐺 .. INSHALLAH ALLAH APKO HUMESA KHUSH AUR HEALTHY RAKHE .. APKO DUNIYA KI HAR WOH CHIZ MILE JISKI AAP DUA KARTE HO LARKIYON KO CHHOR KE .. LARKI MAIN EK HI KAAFI HUN APKI JAAN LENE MAIN AUR APKE LIYE JAAN DENE KE LIYE .. AAP HUMESA HASTE RAHO .. THU THU THU NA APKO NA APKE HASI KO KABHI NAZAR NA LAGE .. AT LAST YOU KNOW I LOVE YOU TO THE MOON AND BACK AND MAYBE I HOPE THAT WE STAY EACHOTHER TILL OUR LAST BREATH .. MY ANGER IS TEMPORARY BUT MY LOVE FOR YOU IS ETERNAL .. JUST LOVE ME LITTLE MORE FARHAN , DONT LET YOUR EGO AND ATTITUDE COME IN OUR RELATIONSHIP .. JUST DO HARDWORK AND MAKE YOURSELF PROUD .. I AM ALWAYS WITH YOU WHETHER YOU ARE RICH OR POOR , PERFECT OR IMPERFECT IT DOESNT MATTER FOR ME .. THE ONLY THING WHICH MATTERS IS I AM ALWAYS WITH YOU , NO MATTER WHAT .. ILOVEYOUALWAYS ❤️`;
+
+let i=0;
+function type(){
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(type,15);
+  }
+}
+
+/* IMAGES */
+let images=[
+"IMG-20260418-WA0059.jpg",
+"IMG-20260418-WA0060.jpg",
+"IMG-20260418-WA0064.jpg",
+"IMG-20260419-WA0018.jpg"
+];
+
+let index=0;
+function slide(){
+  let img=document.getElementById("slide");
+  img.style.opacity=0;
+  setTimeout(()=>{
+    img.src=images[index];
+    img.style.opacity=1;
+    index=(index+1)%images.length;
+  },400);
+}
+
+/* CHAT */
+let chats=["Hey ❤️","Happy Birthday 🥺","I love you 💖","Always stay with me 😘"];
+let ci=0;
+function showChat(){
+  if(ci<chats.length){
+    let div=document.createElement("div");
+    div.className="msg";
+    div.innerText=chats[ci];
+    document.getElementById("chat").appendChild(div);
+    ci++;
+    setTimeout(showChat,1500);
+  }
+}
+
+/* POPUP */
+function showPopup(){
+  document.getElementById("popup").style.display="block";
+}
+
+/* FIREWORKS */
+function fireworks(){
+  let c=document.getElementById("fireworks");
+  let ctx=c.getContext("2d");
+  c.width=window.innerWidth;
+  c.height=window.innerHeight;
+
+  setInterval(()=>{
+    ctx.fillStyle="rgba(0,0,0,0.2)";
+    ctx.fillRect(0,0,c.width,c.height);
+
+    for(let i=0;i<50;i++){
+      ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+      ctx.beginPath();
+      ctx.arc(Math.random()*c.width,Math.random()*c.height,2,0,Math.PI*2);
+      ctx.fill();
+    }
+  },100);
+}
+
+/* START */
+function start(){
+  document.getElementById("music").play();
+  type();
+  slide();
+  setInterval(slide,3000);
+  showChat();
+  setTimeout(showPopup,7000);
+  fireworks();
+
+  for(let i=0;i<30;i++){
+    let heart=document.createElement("div");
+    heart.innerHTML="💖";
+    heart.className="heart";
+    heart.style.left=Math.random()*100+"vw";
+    document.body.appendChild(heart);
+  }
+}
+
+</script>
+</body>
+</html>
